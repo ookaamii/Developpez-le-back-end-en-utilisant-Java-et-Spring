@@ -19,7 +19,7 @@ import java.util.Date;
 @NoArgsConstructor // Pour créer un constructeur sans paramètres
 @Data // Crée automatiquement les getters et setters grâce à Lombok
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 public class User {
 
   @Id
