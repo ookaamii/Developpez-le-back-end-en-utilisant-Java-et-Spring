@@ -26,6 +26,7 @@ public class SpringSecurityConfig {
 
   private final JwtService jwtservice;
   private final CustomUserDetailsService customUserDetailsService;
+  private final CustomErrorEntryPoint customErrorEntryPoint;
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -33,9 +34,11 @@ public class SpringSecurityConfig {
       .csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/api/auth/login", "/api/auth/register").permitAll() // Les routes login et register ne doivent pas être authentifiées
+        .requestMatchers("/auth/login", "/auth/register").permitAll() // Les routes login et register ne doivent pas être authentifiées
         .anyRequest().authenticated()) // Toutes les autres requêtes doivent être authentifiées
       .addFilterBefore(new JwtAuthFilter(customUserDetailsService, jwtservice), UsernamePasswordAuthenticationFilter.class) // Add JWT filter
+      .exceptionHandling(exception -> exception
+        .authenticationEntryPoint(customErrorEntryPoint))  // Authentification échouée -> 401
       .build();
   }
 
