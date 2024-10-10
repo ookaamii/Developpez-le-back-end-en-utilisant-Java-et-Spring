@@ -1,6 +1,7 @@
 package com.api.location.controller;
 
 import com.api.location.model.User;
+import com.api.location.model.UserDTO;
 import com.api.location.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,15 +16,15 @@ public class AuthController {
 
   private final UserService userService;
 
-  @PostMapping("/api/auth/register")
+  @PostMapping("/auth/register")
   public String register(@RequestBody User user) {
     return userService.addUser(user);
   }
 
-  @PostMapping("/api/auth/login")
+  @PostMapping("/auth/login")
   public ResponseEntity<?> authenticateAndGetToken(@RequestBody User user) { return userService.logging(user); }
 
-  @GetMapping("/api/auth/me")
-  public User userProfile() { return userService.getProfilUser(); }
+  @GetMapping("/auth/me")
+  public UserDTO userProfile() { return userService.getProfilUser(); }
 
 }
