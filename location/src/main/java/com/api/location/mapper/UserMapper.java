@@ -12,4 +12,5 @@ public interface UserMapper {
 
   // Mappe les champs de UserDTO vers User
   User userDTOToUser(UserDTO userDTO);
+
 }

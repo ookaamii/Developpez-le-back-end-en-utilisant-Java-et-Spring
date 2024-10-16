@@ -4,7 +4,7 @@ import com.api.location.mapper.UserMapper;
 import com.api.location.model.User;
 import com.api.location.model.UserDTO;
 import com.api.location.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,22 +19,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
-  @Autowired
-  private UserRepository repository;
+  private final UserRepository repository;
 
-  @Autowired
-  private PasswordEncoder encoder;
+  private final PasswordEncoder encoder;
 
-  @Autowired
-  private JwtService jwtService;
+  private final JwtService jwtService;
 
-  @Autowired
-  private AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager;
 
-  @Autowired
-  private UserMapper userMapper;
+  private final UserMapper userMapper;
 
   public String addUser(User user) {
     // Encode password before saving the user
@@ -72,4 +68,5 @@ public class UserService {
     // Mapper l'entité User vers UserDTO pour renvoyer les infos au client
     return userMapper.userToUserDTO(user);
   }
+
 }
