@@ -1,7 +1,6 @@
 package com.api.location.model;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,22 +9,24 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 
-@AllArgsConstructor // Pour créer un constructeur avec tous les champs
-@NoArgsConstructor // Pour créer un constructeur sans paramètres
-@Data // Crée automatiquement les getters et setters grâce à Lombok
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-@Table(name = "users")
-public class User {
+@Data
+@Table(name = "messages")
+public class Message {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue
   private Long id;
 
-  private String email;
+  private String message;
 
-  private String name;
+  @Column(name = "rental_id")
+  private Long rentalId;
 
-  private String password;
+  @Column(name = "user_id")
+  private Long userId;
 
   @CreationTimestamp
   @Column(updatable = false, name = "created_at")
@@ -34,5 +35,4 @@ public class User {
   @UpdateTimestamp
   @Column(name = "updated_at")
   private Date updatedAt;
-
 }

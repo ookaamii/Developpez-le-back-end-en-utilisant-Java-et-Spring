@@ -6,11 +6,16 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserDTO {
+public class RentalDTO {
 
   private Long id;
-  private String email;
   private String name;
+  private Float surface;
+  private Float price;
+  private String picture;
+  private String description;
+  @JsonProperty("owner_id")
+  private Long ownerId;
   @JsonProperty("created_at")
   private Date createdAt;
   @JsonProperty("updated_at")

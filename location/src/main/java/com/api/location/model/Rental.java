@@ -1,7 +1,6 @@
 package com.api.location.model;
 
 import jakarta.persistence.*;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,18 +13,25 @@ import java.util.Date;
 @NoArgsConstructor // Pour créer un constructeur sans paramètres
 @Data // Crée automatiquement les getters et setters grâce à Lombok
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "rentals")
+public class Rental {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  private String email;
-
   private String name;
 
-  private String password;
+  private Float surface;
+
+  private Float price;
+
+  private String picture;
+
+  private String description;
+
+  @Column(name = "owner_id")
+  private Long ownerId;
 
   @CreationTimestamp
   @Column(updatable = false, name = "created_at")

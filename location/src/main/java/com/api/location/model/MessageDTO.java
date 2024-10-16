@@ -6,14 +6,16 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class UserDTO {
+public class MessageDTO {
 
   private Long id;
-  private String email;
-  private String name;
+  private String message;
+  @JsonProperty("rental_id")
+  private Long rentalId;
+  @JsonProperty("user_id")
+  private Long userId;
   @JsonProperty("created_at")
   private Date createdAt;
   @JsonProperty("updated_at")
   private Date updatedAt;
-
 }
