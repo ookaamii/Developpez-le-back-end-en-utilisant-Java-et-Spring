@@ -1,18 +1,17 @@
 package com.api.location.service;
 
 import com.api.location.mapper.UserMapper;
-import com.api.location.model.RentalDTO;
 import com.api.location.model.User;
 import com.api.location.model.UserDTO;
 import com.api.location.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -29,11 +28,14 @@ public class UserService {
   private final AuthenticationManager authenticationManager;
   private final UserMapper userMapper;
 
-  public String addUser(User user) {
+  public ResponseEntity<?> addUser(User user) {
     // Encode password before saving the user
     user.setPassword(encoder.encode(user.getPassword()));
     repository.save(user);
-    return "User Added Successfully";
+    Map<String, Object> authData = new HashMap<>();
+    authData.put("token", jwtService.generateToken(user.getEmail()));
+    authData.put("type", "Bearer");
+    return ResponseEntity.ok(authData);
   }
 
   public ResponseEntity<?> logging(User userDto) {
@@ -46,7 +48,9 @@ public class UserService {
       authData.put("type", "Bearer");
       return ResponseEntity.ok(authData);
     } else {
-      throw new UsernameNotFoundException("Invalid user request!");
+      Map<String, Object> authData = new HashMap<>();
+      authData.put("message", "error");
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(authData);
     }
   }
 
