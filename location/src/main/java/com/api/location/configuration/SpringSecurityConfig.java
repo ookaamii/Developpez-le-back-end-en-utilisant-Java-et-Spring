@@ -34,7 +34,8 @@ public class SpringSecurityConfig {
       .csrf(AbstractHttpConfigurer::disable)
       .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
       .authorizeHttpRequests(auth -> auth
-        .requestMatchers("/auth/login", "/auth/register").permitAll() // Les routes login et register ne doivent pas être authentifiées
+        .requestMatchers("/auth/login", "/auth/register").permitAll()
+        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()// Les routes login et register ne doivent pas être authentifiées
         .anyRequest().authenticated()) // Toutes les autres requêtes doivent être authentifiées
       .addFilterBefore(new JwtAuthFilter(customUserDetailsService, jwtservice), UsernamePasswordAuthenticationFilter.class) // Add JWT filter
       .exceptionHandling(exception -> exception
