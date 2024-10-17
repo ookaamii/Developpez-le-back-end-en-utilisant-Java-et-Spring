@@ -39,4 +39,11 @@ public class CustomErrorEntryPoint implements AuthenticationEntryPoint {
     response.getWriter().write(jsonResponse);
   }
 
+  // Gestion générique (facultative) pour d'autres exceptions
+  @ExceptionHandler(Exception.class)
+  public void handleOtherExceptions(HttpServletRequest request, HttpServletResponse response, Exception ex) throws IOException {
+    // Laisser Spring gérer les autres exceptions par défaut en renvoyant simplement
+    // l'erreur d'origine avec un message par défaut
+    response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Erreur interne du serveur");
+  }
 }

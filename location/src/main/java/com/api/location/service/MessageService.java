@@ -16,7 +16,6 @@ import java.util.Map;
 public class MessageService {
 
   private final MessageRepository repository;
-
   private final MessageMapper messageMapper;
 
   public ResponseEntity<?> addMessage(MessageDTO messageDTO) {
