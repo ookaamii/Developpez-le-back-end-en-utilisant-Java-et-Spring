@@ -1,6 +1,7 @@
 package com.api.location.service;
 
 import com.api.location.mapper.UserMapper;
+import com.api.location.model.RentalDTO;
 import com.api.location.model.User;
 import com.api.location.model.UserDTO;
 import com.api.location.repository.UserRepository;
@@ -23,13 +24,9 @@ import java.util.Map;
 public class UserService {
 
   private final UserRepository repository;
-
   private final PasswordEncoder encoder;
-
   private final JwtService jwtService;
-
   private final AuthenticationManager authenticationManager;
-
   private final UserMapper userMapper;
 
   public String addUser(User user) {
@@ -67,6 +64,12 @@ public class UserService {
 
     // Mapper l'entité User vers UserDTO pour renvoyer les infos au client
     return userMapper.userToUserDTO(user);
+  }
+
+  public UserDTO getUserById(int id) {
+    return repository.findById(id)
+      .map(userMapper::userToUserDTO)
+      .orElse(null);
   }
 
 }
