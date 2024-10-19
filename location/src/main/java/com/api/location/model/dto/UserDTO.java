@@ -1,25 +1,28 @@
-package com.api.location.model;
+package com.api.location.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import java.util.Date;
 
 @Data
-public class RentalDTO {
+public class UserDTO {
 
   private Long id;
+
+  private String email;
+
   private String name;
-  private Float surface;
-  private Float price;
-  private String picture;
-  private String description;
-  @JsonProperty("owner_id")
-  private Long ownerId;
+
+  @JsonIgnore
+  private String password;
+
   @JsonProperty("created_at")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
   private Date createdAt;
+
   @JsonProperty("updated_at")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
   private Date updatedAt;

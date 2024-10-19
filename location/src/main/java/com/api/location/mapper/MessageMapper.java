@@ -1,7 +1,7 @@
 package com.api.location.mapper;
 
 import com.api.location.model.Message;
-import com.api.location.model.MessageDTO;
+import com.api.location.model.dto.MessageDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
