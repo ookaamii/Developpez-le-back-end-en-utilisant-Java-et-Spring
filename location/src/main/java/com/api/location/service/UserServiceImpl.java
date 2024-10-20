@@ -3,9 +3,11 @@ package com.api.location.service;
 import com.api.location.mapper.UserMapper;
 import com.api.location.model.User;
 import com.api.location.model.dto.LoginDTO;
+import com.api.location.model.dto.RegisterDTO;
 import com.api.location.model.dto.UserDTO;
 import com.api.location.model.dto.AuthDataDTO;
 import com.api.location.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,21 +33,15 @@ public class UserServiceImpl implements UserService {
   private final UserMapper userMapper;
 
   @Override
-  public AuthDataDTO addUser(UserDTO userDTO) {
-    // Encode password before saving the user
-    // mettre le DTO à la place de user
-    // faire les verifs : si email existant = erreur 400 avant
+  public AuthDataDTO addUser(RegisterDTO registerDTO) {
+    if (repository.existsByEmail(registerDTO.getEmail())) {
+      throw new IllegalArgumentException("Un utilisateur avec cet email existe déjà.");
+    }
 
-    User user = userMapper.userDTOToUser(userDTO);
-
+    User user = userMapper.userRegisterDTOToUser(registerDTO);
     user.setPassword(encoder.encode(user.getPassword()));
     repository.save(user);
-    // dans le DTO mettre directement le token, pas besoin de map
 
-   /* Map<String, Object> authData = new HashMap<>();
-    authData.put("token", jwtService.generateToken(user.getEmail()));*/
-
-    // ne pas mettre de ResponseEntity dans les services, seulement dans le controller
     return new AuthDataDTO(jwtService.generateToken(user.getEmail()));
   }
 
@@ -62,7 +58,6 @@ public class UserServiceImpl implements UserService {
   // Méthode pour obtenir les informations de l'utilisateur connecté
   @Override
   public UserDTO getProfilUser() {
-
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
     String email = userDetails.getUsername(); // Dans ce cas, c'est l'email
@@ -78,7 +73,7 @@ public class UserServiceImpl implements UserService {
   public UserDTO getUserById(int id) {
     return repository.findById(id)
       .map(userMapper::userToUserDTO)
-      .orElse(null);
+      .orElseThrow(() -> new EntityNotFoundException("Rental not found with id: " + id));
   }
 
 }

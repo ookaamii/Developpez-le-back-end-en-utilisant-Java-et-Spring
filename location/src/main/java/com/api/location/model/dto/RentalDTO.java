@@ -18,10 +18,7 @@ public class RentalDTO {
 
   private Float price;
 
-  //private String picture;
-  //il y a un soucis ici. peut-être qu'il faut laisser string picture et mettre une autre variable pour récupérerle file
-  //ou faire un traitement dans les services pour refaire fichier > string
-  private MultipartFile picture;
+  private String picture;
 
   private String description;
 

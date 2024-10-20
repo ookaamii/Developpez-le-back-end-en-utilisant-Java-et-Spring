@@ -1,21 +1,21 @@
 package com.api.location.controller;
 
 import com.api.location.model.User;
-import com.api.location.model.dto.ResponseDTO;
-import com.api.location.model.dto.LoginDTO;
-import com.api.location.model.dto.UserDTO;
-import com.api.location.model.dto.AuthDataDTO;
+import com.api.location.model.dto.*;
+import com.api.location.service.JwtService;
 import com.api.location.service.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +28,8 @@ import java.util.HashMap;
 @Tag(name = "Authentification Controller", description = "Gère l'authentification")
 public class AuthController {
 
+  @Autowired
+  private JwtService jwtService;
   private final UserServiceImpl userServiceImpl;
 
   @PostMapping("/auth/register")
@@ -40,11 +42,8 @@ public class AuthController {
     @ApiResponse(responseCode = "400", description = "Erreur requête", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object", example = "{}")))
   })
-  public ResponseEntity<?> register(@RequestBody UserDTO userDTO) {
-    if (userDTO.getEmail() == null || userDTO.getEmail().isEmpty()) {
-      return ResponseEntity.badRequest().body(new HashMap<>());
-    }
-    return ResponseEntity.ok(userServiceImpl.addUser(userDTO));
+  public ResponseEntity<?> register(@RequestBody RegisterDTO registerDTO) {
+    return ResponseEntity.ok(userServiceImpl.addUser(registerDTO));
   }
 
   @PostMapping("/auth/login")
@@ -61,9 +60,10 @@ public class AuthController {
     try {
       AuthDataDTO authData = userServiceImpl.logging(loginDTO);
       return ResponseEntity.ok(authData);
-    } catch (AuthenticationException e) {
-      // Retourne une réponse 401 avec un DTO personnalisé
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new ResponseDTO("error"));
+    } catch (BadCredentialsException e) {
+      // Retourner une réponse 401 avec un message d'erreur personnalisé
+      return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+        .body(new ResponseDTO("error"));
     }
   }
 
@@ -77,13 +77,10 @@ public class AuthController {
     @ApiResponse(responseCode = "401", description = "Accès refusé", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object", example = "{}")))
   })
+  @SecurityRequirement(name = "Bearer Authentication")
   public ResponseEntity<?> userProfile() {
-    try {
-      UserDTO userDTO = userServiceImpl.getProfilUser();
-      return ResponseEntity.ok(userDTO);
-    } catch (RuntimeException e) {
-      return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new HashMap<>());
-    }
+    jwtService.checkAuthentication();
+    return ResponseEntity.ok(userServiceImpl.getProfilUser());
   }
 
 }

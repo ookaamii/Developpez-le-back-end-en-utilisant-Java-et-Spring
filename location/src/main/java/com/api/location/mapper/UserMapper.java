@@ -1,6 +1,7 @@
 package com.api.location.mapper;
 
 import com.api.location.model.User;
+import com.api.location.model.dto.RegisterDTO;
 import com.api.location.model.dto.UserDTO;
 import org.mapstruct.Mapper;
 
@@ -12,5 +13,7 @@ public interface UserMapper {
 
   // Mappe les champs de UserDTO vers User
   User userDTOToUser(UserDTO userDTO);
+
+  User userRegisterDTOToUser(RegisterDTO registerDTO);
 
 }
