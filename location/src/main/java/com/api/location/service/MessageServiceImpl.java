@@ -26,12 +26,6 @@ public class MessageServiceImpl implements MessageService {
 
   @Override
   public ResponseDTO addMessage(MessageDTO messageDTO) {
-    // Vérifie l'authentification de l'utilisateur
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-    if (authentication == null || !authentication.isAuthenticated()) {
-      throw new AuthenticationServiceException("Utilisateur non authentifié");
-    }
-
     // Vérification de la validité du message
     if (messageDTO.getMessage() == null || messageDTO.getMessage().isEmpty()) {
       throw new IllegalArgumentException();
