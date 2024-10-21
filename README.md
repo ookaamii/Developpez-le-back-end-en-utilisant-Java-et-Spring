@@ -6,7 +6,8 @@ We are creating a portal to connect future tenants and owners for seasonal renta
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.0 and Java version 17.
 
-### MySQL - Create database
+
+## MySQL - Create database
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
 
