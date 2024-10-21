@@ -11,9 +11,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
 
-> mysql -u root -p
-> CREATE DATABASE nomdelabase;
-> exit;
+> mysql -u root -p  
+> CREATE DATABASE nomdelabase;  
+> exit;  
 > mysql -u root -p nomdelabase < mon/chemin/nom_du_fichier.sql
 
 ## Start the project
@@ -50,6 +50,6 @@ Launch Back-end with your IDE
 
 
 ## URL Swagger
-http://localhost:3001/api/swagger-ui/index.html
+http://localhost:3001/api/swagger-ui/index.html  
 http://localhost:3001/api/v3/api-docs
 
