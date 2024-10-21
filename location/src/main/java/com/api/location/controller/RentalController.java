@@ -1,6 +1,5 @@
 package com.api.location.controller;
 
-import com.api.location.model.Rental;
 import com.api.location.model.dto.CreateRentalDTO;
 import com.api.location.model.dto.RentalDTO;
 import com.api.location.model.dto.RentalsResponseDTO;
@@ -35,7 +34,7 @@ public class RentalController {
   @Operation(summary = "Affiche les locations")
   @ApiResponses({
     @ApiResponse(responseCode = "200", description = "OK", content = {@Content(mediaType = "application/json",
-            schema = @Schema(implementation = Rental.class))}),
+            schema = @Schema(implementation = RentalsResponseDTO.class))}),
     @ApiResponse(responseCode = "401", description = "Accès refusé", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object")))
   })
@@ -50,7 +49,8 @@ public class RentalController {
   @Operation(summary = "Enregistre une location")
   @ApiResponses({
     @ApiResponse(responseCode = "200", description = "OK", content = @Content(mediaType = "application/json",
-      schema = @Schema(type = "message", example = "Rental created !"))),
+      schema = @Schema(type = "object",
+        example = "{\"message\": \"Rental created !\"}"))),
     @ApiResponse(responseCode = "401", description = "Accès refusé", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object")))
   })
@@ -63,7 +63,7 @@ public class RentalController {
   @Operation(summary = "Affiche une location")
   @ApiResponses({
     @ApiResponse(responseCode = "200", description = "OK", content = {@Content(mediaType = "application/json",
-      schema = @Schema(implementation = Rental.class))}),
+      schema = @Schema(implementation = RentalDTO.class))}),
     @ApiResponse(responseCode = "401", description = "Accès refusé", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object")))
   })
@@ -76,7 +76,8 @@ public class RentalController {
   @Operation(summary = "Modifie une location")
   @ApiResponses({
     @ApiResponse(responseCode = "400", description = "OK", content = @Content(mediaType = "application/json",
-      schema = @Schema(type = "message", example = "Rental updated !"))),
+      schema = @Schema(type = "object",
+        example = "{\"message\": \"Rental updated !\"}"))),
     @ApiResponse(responseCode = "401", description = "Accès refusé", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object")))
   })
