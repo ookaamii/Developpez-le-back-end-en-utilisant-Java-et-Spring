@@ -1,6 +1,5 @@
 package com.api.location.controller;
 
-import com.api.location.model.User;
 import com.api.location.model.dto.UserDTO;
 import com.api.location.service.JwtService;
 import com.api.location.service.UserServiceImpl;
@@ -31,7 +30,7 @@ public class UserController {
   @Operation(summary = "Afficher des infos utilisateurs")
   @ApiResponses({
     @ApiResponse(responseCode = "200", description = "OK", content = {@Content(mediaType = "application/json",
-      schema = @Schema(implementation = User.class))}),
+      schema = @Schema(implementation = UserDTO.class))}),
     @ApiResponse(responseCode = "401", description = "Accès refusé", content = @Content(mediaType = "application/json",
       schema = @Schema(type = "object")))
   })

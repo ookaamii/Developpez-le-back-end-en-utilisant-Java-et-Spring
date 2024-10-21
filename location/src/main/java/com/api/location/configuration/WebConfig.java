@@ -11,6 +11,6 @@ public class WebConfig implements WebMvcConfigurer {
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     // Configure Spring pour servir les fichiers depuis le dossier 'static/uploads'
     registry.addResourceHandler("/uploads/**")
-      .addResourceLocations("classpath:/static/uploads/");
+      .addResourceLocations("classpath:/uploads/");
   }
 }
