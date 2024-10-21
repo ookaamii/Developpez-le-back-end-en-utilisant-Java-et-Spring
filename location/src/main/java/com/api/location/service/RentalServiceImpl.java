@@ -58,7 +58,7 @@ public class RentalServiceImpl implements RentalService {
     if (picture != null && !picture.isEmpty()) {
       String fileName = picture.getOriginalFilename();
       String randomFileName = generateUniqueFileName(fileName); // Générer un nom de fichier unique
-      Path filePath = Paths.get("src/main/resources/uploads/" + randomFileName);
+      Path filePath = Paths.get("src/main/resources/static/uploads/" + randomFileName);
 
       try {
         // On crée le dossier s'il n'existe pas
@@ -66,7 +66,7 @@ public class RentalServiceImpl implements RentalService {
         Files.copy(picture.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // On enregistre l'URL complète dans le champ picture de Rental
-        String fileUrl = "http://localhost:3001/uploads/" + randomFileName;
+        String fileUrl = "http://localhost:3001/api/uploads/" + randomFileName;
         rental.setPicture(fileUrl);
       } catch (IOException e) {
         throw new RuntimeException("Erreur lors de l'enregistrement du fichier", e);
