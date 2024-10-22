@@ -1,9 +1,9 @@
 package com.api.location.controller;
 
-import com.api.location.model.dto.MessageDTO;
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.request.MessageDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 import com.api.location.service.JwtService;
-import com.api.location.service.MessageServiceImpl;
+import com.api.location.service.impl.MessageServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -1,30 +1,24 @@
-package com.api.location.model.dto;
+package com.api.location.model.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 
 @Data
-public class RentalDTO {
+public class UserDTO {
 
   private Long id;
 
   private String name;
 
-  private Float surface;
+  private String email;
 
-  private Float price;
-
-  private String picture;
-
-  private String description;
-
-  @JsonProperty("owner_id")
-  private Long ownerId;
+  @JsonIgnore
+  private String password;
 
   @JsonProperty("created_at")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")

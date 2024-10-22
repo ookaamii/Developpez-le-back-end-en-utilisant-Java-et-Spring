@@ -27,46 +27,46 @@ public class JwtService {
   @Value("${security.jwt.expiration-time}")
   private long jwtExpiration;
 
-  // Generate token with given email
+  // Génère un token avec l'email
   public String generateToken(String email) {
     Map<String, Object> claims = new HashMap<>();
     return createToken(claims, email);
   }
 
-  // Create a JWT token with specified claims and subject (email)
+  // Crée un JWT token avec des claims spécifiques et un sujet (email)
   private String createToken(Map<String, Object> claims, String email) {
     return Jwts.builder()
       .setClaims(claims)
       .setSubject(email)
       .setIssuedAt(new Date())
-      .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // Token valid for 30 minutes
+      .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 30)) // Token valide 30min
       .signWith(getSignKey(), SignatureAlgorithm.HS256)
       .compact();
   }
 
-  // Get the signing key for JWT token
+  // Récupère la signature de la clé JWT token
   private Key getSignKey() {
     byte[] keyBytes = Decoders.BASE64.decode(secretKey);
     return Keys.hmacShaKeyFor(keyBytes);
   }
 
-  // Extract the email from the token
+  // Extrait l'email du token
   public String extractEmail(String token) {
     return extractClaim(token, Claims::getSubject);
   }
 
-  // Extract the expiration date from the token
+  // Extrait la date d'expiration du token
   public Date extractExpiration(String token) {
     return extractClaim(token, Claims::getExpiration);
   }
 
-  // Extract a claim from the token
+  // Extraait un claim du token
   public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
     final Claims claims = extractAllClaims(token);
     return claimsResolver.apply(claims);
   }
 
-  // Extract all claims from the token
+  // Extrait tous les claims du token
   private Claims extractAllClaims(String token) {
     return Jwts.parserBuilder()
       .setSigningKey(getSignKey())
@@ -75,12 +75,12 @@ public class JwtService {
       .getBody();
   }
 
-  // Check if the token is expired
+  // Vérifie si le token a expiré
   private Boolean isTokenExpired(String token) {
     return extractExpiration(token).before(new Date());
   }
 
-  // Validate the token against user details and expiration
+  // Valide le token par rapport à l'user details et son expiration
   public Boolean validateToken(String token, UserDetails userDetails) {
     final String email = extractEmail(token);
     return (email.equals(userDetails.getUsername()) && !isTokenExpired(token));

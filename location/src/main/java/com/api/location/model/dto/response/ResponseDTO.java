@@ -1,4 +1,4 @@
-package com.api.location.model.dto;
+package com.api.location.model.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 @NoArgsConstructor
-public class AuthDataDTO {
+public class ResponseDTO {
 
-  private String token;
+  private String message;
 
 }

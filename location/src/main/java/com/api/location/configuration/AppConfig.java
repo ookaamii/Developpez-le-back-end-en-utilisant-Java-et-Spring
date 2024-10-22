@@ -1,3 +1,6 @@
+/**
+ * Configuration pour charger le fichier .env
+ */
 package com.api.location.configuration;
 
 import org.springframework.context.annotation.Bean;

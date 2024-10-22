@@ -1,13 +1,14 @@
-package com.api.location.service;
+package com.api.location.service.impl;
 
 import com.api.location.mapper.RentalMapper;
 import com.api.location.model.Rental;
 import com.api.location.model.User;
-import com.api.location.model.dto.CreateRentalDTO;
-import com.api.location.model.dto.RentalDTO;
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.request.CreateRentalDTO;
+import com.api.location.model.dto.request.RentalDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 import com.api.location.repository.RentalRepository;
 import com.api.location.repository.UserRepository;
+import com.api.location.service.RentalService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,7 +33,10 @@ public class RentalServiceImpl implements RentalService {
   private final RentalRepository repository;
   private final UserRepository userRepository;
   private final RentalMapper rentalMapper;
-  private static final String UPLOAD_DIR = "uploads/";
+  @Value("${PATH_IMAGE}")
+  private String pathImg;
+  @Value("${URL_IMAGE}")
+  private String urlImg;
   @Value("${app.base-url}")
   private String baseUrl;
 
@@ -58,7 +62,7 @@ public class RentalServiceImpl implements RentalService {
     if (picture != null && !picture.isEmpty()) {
       String fileName = picture.getOriginalFilename();
       String randomFileName = generateUniqueFileName(fileName); // Générer un nom de fichier unique
-      Path filePath = Paths.get("src/main/resources/static/uploads/" + randomFileName);
+      Path filePath = Paths.get(pathImg + randomFileName);
 
       try {
         // On crée le dossier s'il n'existe pas
@@ -66,7 +70,7 @@ public class RentalServiceImpl implements RentalService {
         Files.copy(picture.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
 
         // On enregistre l'URL complète dans le champ picture de Rental
-        String fileUrl = "http://localhost:3001/api/uploads/" + randomFileName;
+        String fileUrl = urlImg + randomFileName;
         rental.setPicture(fileUrl);
       } catch (IOException e) {
         throw new RuntimeException("Erreur lors de l'enregistrement du fichier", e);

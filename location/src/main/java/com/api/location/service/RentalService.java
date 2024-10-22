@@ -1,8 +1,8 @@
 package com.api.location.service;
 
-import com.api.location.model.dto.CreateRentalDTO;
-import com.api.location.model.dto.RentalDTO;
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.request.CreateRentalDTO;
+import com.api.location.model.dto.request.RentalDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 
 import java.io.IOException;
 import java.util.List;

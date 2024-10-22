@@ -1,11 +1,11 @@
 package com.api.location.controller;
 
-import com.api.location.model.dto.CreateRentalDTO;
-import com.api.location.model.dto.RentalDTO;
-import com.api.location.model.dto.RentalsResponseDTO;
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.request.CreateRentalDTO;
+import com.api.location.model.dto.request.RentalDTO;
+import com.api.location.model.dto.response.RentalsResponseDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 import com.api.location.service.JwtService;
-import com.api.location.service.RentalServiceImpl;
+import com.api.location.service.impl.RentalServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

@@ -33,5 +33,5 @@ build/
 .vscode/
 
 .env
-src/main/resources/uploads/
-src/main/resources/static/uploads/
+src/main/uploads/
+src/main/uploads/
