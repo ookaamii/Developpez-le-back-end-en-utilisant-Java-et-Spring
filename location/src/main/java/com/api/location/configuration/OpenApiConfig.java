@@ -1,7 +1,10 @@
+/**
+ * Configuration pour swagger, avec OpenApi
+ * Ajoute des routes sécurisées demandant un token
+ */
 package com.api.location.configuration;
 
 import io.swagger.v3.oas.models.Components;
-import io.swagger.v3.oas.models.security.SecurityRequirement;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import io.swagger.v3.oas.models.OpenAPI;

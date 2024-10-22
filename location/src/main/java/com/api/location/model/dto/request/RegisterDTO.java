@@ -1,4 +1,4 @@
-package com.api.location.model.dto;
+package com.api.location.model.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

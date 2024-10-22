@@ -1,8 +1,12 @@
 package com.api.location.controller;
 
-import com.api.location.model.dto.*;
+import com.api.location.model.dto.request.LoginDTO;
+import com.api.location.model.dto.request.RegisterDTO;
+import com.api.location.model.dto.response.UserDTO;
+import com.api.location.model.dto.response.AuthDataDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 import com.api.location.service.JwtService;
-import com.api.location.service.UserServiceImpl;
+import com.api.location.service.impl.UserServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

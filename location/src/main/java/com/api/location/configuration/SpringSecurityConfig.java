@@ -1,3 +1,6 @@
+/**
+ * Configuration pour la sécurité de l'application
+ */
 package com.api.location.configuration;
 
 import com.api.location.filter.JwtAuthFilter;

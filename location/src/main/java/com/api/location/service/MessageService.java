@@ -1,7 +1,7 @@
 package com.api.location.service;
 
-import com.api.location.model.dto.MessageDTO;
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.request.MessageDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 
 public interface MessageService {
 

@@ -1,12 +1,14 @@
-package com.api.location.service;
+package com.api.location.service.impl;
 
 import com.api.location.mapper.UserMapper;
 import com.api.location.model.User;
-import com.api.location.model.dto.LoginDTO;
-import com.api.location.model.dto.RegisterDTO;
-import com.api.location.model.dto.UserDTO;
-import com.api.location.model.dto.AuthDataDTO;
+import com.api.location.model.dto.request.LoginDTO;
+import com.api.location.model.dto.request.RegisterDTO;
+import com.api.location.model.dto.response.UserDTO;
+import com.api.location.model.dto.response.AuthDataDTO;
 import com.api.location.repository.UserRepository;
+import com.api.location.service.JwtService;
+import com.api.location.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
