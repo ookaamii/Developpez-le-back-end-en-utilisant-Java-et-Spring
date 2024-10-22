@@ -37,6 +37,10 @@ Install maven target:
 
 > mvn clean install
 
+Launch Back-end:
+
+> mvn spring-boot:run
+
 Go inside folder:
 
 > cd Developpez-le-back-end-en-utilisant-Java-et-Spring
@@ -48,8 +52,6 @@ Install dependencies:
 Launch Front-end:
 
 > npm run start;
-
-Launch Back-end with your IDE
 
 
 ## URL Swagger
