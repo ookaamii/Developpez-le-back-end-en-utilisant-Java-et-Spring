@@ -1,5 +1,6 @@
-package com.api.location.model.dto;
+package com.api.location.model.dto.response;
 
+import com.api.location.model.dto.request.RentalDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

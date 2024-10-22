@@ -1,10 +1,11 @@
-package com.api.location.service;
+package com.api.location.service.impl;
 
 import com.api.location.mapper.MessageMapper;
 import com.api.location.model.Message;
-import com.api.location.model.dto.MessageDTO;
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.request.MessageDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 import com.api.location.repository.MessageRepository;
+import com.api.location.service.MessageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

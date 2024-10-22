@@ -1,6 +1,9 @@
+/**
+ * Configuration pour la gestion d'erreurs, en évitant de surcharger les Controllers avec
+ */
 package com.api.location.configuration;
 
-import com.api.location.model.dto.ResponseDTO;
+import com.api.location.model.dto.response.ResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

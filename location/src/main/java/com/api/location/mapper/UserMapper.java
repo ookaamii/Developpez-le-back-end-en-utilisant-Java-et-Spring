@@ -1,8 +1,8 @@
 package com.api.location.mapper;
 
 import com.api.location.model.User;
-import com.api.location.model.dto.RegisterDTO;
-import com.api.location.model.dto.UserDTO;
+import com.api.location.model.dto.request.RegisterDTO;
+import com.api.location.model.dto.response.UserDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

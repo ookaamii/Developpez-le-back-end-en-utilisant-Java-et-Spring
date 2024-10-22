@@ -1,4 +1,4 @@
-package com.api.location.model.dto;
+package com.api.location.model.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,17 +8,22 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class MessageDTO {
+public class RentalDTO {
 
   private Long id;
 
-  private String message;
+  private String name;
 
-  @JsonProperty("rental_id")
-  private Long rentalId;
+  private Float surface;
 
-  @JsonProperty("user_id")
-  private Long userId;
+  private Float price;
+
+  private String picture;
+
+  private String description;
+
+  @JsonProperty("owner_id")
+  private Long ownerId;
 
   @JsonProperty("created_at")
   @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy/MM/dd")
